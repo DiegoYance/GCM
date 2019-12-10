@@ -1,5 +1,6 @@
 const Documento = require('../models/Documento')
 
+
 const AppError = require("../helpers/AppError")
 
 /**
@@ -7,20 +8,22 @@ const AppError = require("../helpers/AppError")
 **/
 exports.crear = async (req, res, next) => {
     try {
+        console.log('llegas');
+        console.log(req.body);
+        
         const body = req.body
         // Crear un nuevo documento
         const documento = new Documento({
             titulo: req.body.titulo,
-            tipo: req.body.tipo,
             resumen: req.body.resumen,
-            fecha: req.body.fecha,
+            fecha: body.fecha.split('-')[0],
             URL_archivo: req.body.URL_archivo,
             grado: req.body.grado,
             cita: req.body.cita,
             URI: req.body.URI,
             descripcion: req.body.descripcion,
             disciplina: req.body.disciplina,
-            tipo_documento: 1
+            tipo: req.body.tipo
         });
         //Crear asesores
         const asesores = Array.isArray(body.asesores) ? body.asesores : [body.asesores]
@@ -33,7 +36,9 @@ exports.crear = async (req, res, next) => {
         documento.palabras_clave = palabras_clave
         // Guardar un documento en la base de datos
         await documento.save()
-        res.send(documento)
+        req.flash("success", {msg: "Tesis creada correctamente."})
+        res.redirect('/admin/tesis')
+    
     } catch (error) {
         next(new AppError(error, "back"))
     }

@@ -6,7 +6,7 @@ const Usuario = require('../models/Usuario')
 const TipoUsuario = require('../models/TipoUsuario')
 
 exports.getLogin = async (req, res, next) => {
-  res.render('acceso/loginUsuario', { title: "Acceso", layout: "main" });
+  res.render('acceso/loginUsuario', { title: "Acceso", layout: "layoutNoSearch" });
 }
 
 exports.postLogin = (req, res, next) => {
@@ -21,7 +21,8 @@ exports.postLogin = (req, res, next) => {
       req.logIn(user, (err) => {
         if (err) { return next(new AppError(err, `/acceso`)); }
         if (user.tipoUsuario == 2) {
-          return res.redirect('/usuario');
+          req.flash('success', {msg: "Bienvenido uwu"})
+          return res.redirect('/');
         } else {
           return res.redirect('/homeadmin');
         }
@@ -33,7 +34,7 @@ exports.postLogin = (req, res, next) => {
 }
 
 exports.getRegistro = (req, res, next) => {
-  res.render('acceso/registro', { title: "Registro", layout: "main" });
+  res.render('acceso/registro', { title: "Registro", layout: "layoutNoSearch" });
 }
 
 exports.postRegistro = async (req, res, next) => {
