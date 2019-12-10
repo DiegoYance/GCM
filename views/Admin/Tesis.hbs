@@ -103,82 +103,6 @@
   </div>
 </div>
 
-<div class="modal" tabindex="-1" role="dialog" id="modaleditar">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Editar Producto</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form action="<?php echo base_url(); ?>producto/editar" method="post">
-        <div class="modal-body">
-          <div class="cuerpo-modal row">
-            <input type="hidden" name="id" value>
-            <div class="form-group  col-md-12">
-              <label>Planta</label>
-              <select class="form-control" name="planta">
-                <option value="1" selected>Planta Pacasmayo</option>
-                <option value="2">Planta Piura</option>
-                <option value="3">Planta Rioja</option>
-              </select>
-            </div>
-            <div class="form-group col-md-12">
-              <label>Precio Final en base a:</label>
-              <select class="form-control" name="basefinal">
-                <!-- <option value="1" selected>Planta Pacasmayo</option>
-                      <option value="2" >Planta Piura</option>
-                      <option value="3" >Planta Rioja</option> -->
-              </select>
-              <!-- <br>
-                  <input type="text" name="preciobase" class="form-control" readonly> -->
-            </div>
-            <div class="form-group col-md-12">
-              <label>Variación</label>
-              <div class="form-check col-md-6">
-                <input class="form-check-input variacion porc" type="radio" name="tipovariacion" id="exampleRadios1"
-                  value="%">
-                <label class="form-check-label" for="exampleRadios1">
-                  Porcentual (%)
-                </label>
-              </div>
-              <div class="form-check col-md-6">
-                <input class="form-check-input variacion mon" type="radio" name="tipovariacion" id="exampleRadios1"
-                  value="S/">
-                <label class="form-check-label" for="exampleRadios1">
-                  Monetaria (S/)
-                </label>
-              </div>
-            </div>
-            <div class="form-group col-md-6">
-              <label>Incremento</label>
-              <input class="form-control" type="number" required name="incremento" value="0.0" step=".01">
-            </div>
-            <div class="form-group simbolo col-md-6">
-              <label><b>S/</b></label>
-            </div>
-            <!-- <div class="form-group col-md-12">
-                  <label>Precio Final</label>
-                  <input class="form-control" type="text" required name="preciofinal" readonly>
-               </div> -->
-            <div class="form-group col-md-12">
-              <label>Nombre:</label>
-              <input type="text" name="nombre" class="form-control">
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Guardar</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-
-
 <div class="modal" tabindex="-1" role="dialog" id="modaleliminar">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -213,36 +137,10 @@
 
   <div class="row filtros">
     <div class="col-sm-4">
-      <label><b>Comunidad</b></label>
-      <select class="form-control" name="comunidad">
-        <option value="1" selected>Ciencias Basicas</option>
-        <option value="2">Ciencias de la Salud</option>
-        <option value="3">Ciencias Económicas y de la Gestión</option>
-        <option value="4">Humanidades Jurídicas y sociales</option>
-        <option value="5">Ingeniería</option>
-
-      </select>
+      <label><b>Titulo</b></label>
+      <input class="form-control" placeholder="Buscar por título" name="titulo">
 
 
-    </div>
-    <div class="col-sm-4">
-      <label><b>Año</b></label>
-      <select class="form-control" name="año">
-        <option value="2010" selected>2010</option>
-        <option value="2011">2011</option>
-        <option value="2012">2012</option>
-        <option value="2013">2013</option>
-        <option value="2014">2014</option>
-        <option value="2015">2015</option>
-        <option value="2016">2016</option>
-        <option value="2017">2017</option>
-        <option value="2018">2018</option>
-        <option value="2019">2019</option>
-
-
-
-
-      </select>
     </div>
     <div class="col-sm-4" style="margin-top:27px">
       <button type="button" class="btn btn-secondary btn-agregar" data-toggle="modal" data-target="#modalagregar"><i
@@ -262,9 +160,33 @@
         </tr>
       </thead>
 
-      <tbody class="lista">
-
-
+      <tbody>
+        {{#each documentos}}
+          <tr>
+            <td>{{this.titulo}}</td>
+            <td>{{this.fecha}}</td>
+            <td>{{this.tipo.escuela_profesional.facultad.area_academica.nombre}}</td>
+            <td><button type="button" class="btn btn-outline-danger btn-eliminar" data-toggle="modal" data-target="#modaleliminar-{{this._id}}"><i class="fas fa-trash-alt"></i></button></td>
+             <div class="modal" tabindex="-1" role="dialog" id="modaleliminar-{{this._id}}">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">¿Seguro que desea eliminar?</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <form action="/tesis/{{this._id}}/eliminar" method="post">
+                  <div class="modal-body">
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div> 
+          </tr>
+        {{/each}}
       </tbody>
     </table>
 

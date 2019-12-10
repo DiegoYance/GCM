@@ -24,7 +24,7 @@ exports.postLogin = (req, res, next) => {
           req.flash('success', {msg: "Bienvenido uwu"})
           return res.redirect('/');
         } else {
-          return res.redirect('/homeadmin');
+          return res.redirect('/admin/tesis');
         }
       });
     } catch (error) {

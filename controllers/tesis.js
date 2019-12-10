@@ -38,6 +38,17 @@ exports.crear = async (req, res, next) => {
         res.redirect('/admin/tesis')
     
     } catch (error) {
-        next(new AppError(error, "back"))
+        next(new AppError(error, "/admin/tesis"))
     }
 };
+
+exports.borrarTesis = async (req, res, next) => {
+    try {
+        const tesis = await Documento.findById(req.params.id)
+        await tesis.remove()
+        req.flash("success", {msg: "Tesis eliminada correctamente."})
+        res.redirect('/admin/tesis')
+    } catch (error) {
+        next(new AppError(error, "/admin/tesis"))        
+    }
+}
