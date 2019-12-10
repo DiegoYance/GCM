@@ -4,15 +4,12 @@ const AppError = require("../helpers/AppError")
 
 const util = require('../helpers')
 
-console.log('1a.- buscador.buscar')
 
 exports.buscar = async (req, res, next) => {
 
-    console.log('1b.- buscador.buscar')
     try {
         const query = req.query
 
-        console.log(req.query)
         const filter = {
             tipo_documento: 1
         }
@@ -51,15 +48,6 @@ exports.buscar = async (req, res, next) => {
                 next_page,
                 documentos
             })
-
-        // res.status(200).send({
-        //     limit,
-        //     count,
-        //     page,
-        //     pages,
-        //     documentos,
-        //     titulo
-        // })
     } catch (error) {
         next(new AppError(error))
     }
