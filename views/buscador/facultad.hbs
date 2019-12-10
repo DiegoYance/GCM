@@ -17,32 +17,34 @@
     </form>
 	<div class="home-lista-tesis masvisitadas-busqueda col-12">
 		{{#each documentos}}
-			<div class="home-tesis col-12">
-				<div class="home-tesis-cabecera1 col-12">
-					{{#if this.restringido}}
+			<a href="{{this.URL_archivo}}" target="_blank">
+				<div class="home-tesis col-12">
+					<div class="home-tesis-cabecera1 col-12">
+						{{#if this.restringido}}
 						<i class="fas fa-unlock"></i>&nbsp;
 						Acceso restringido <span class="home-articulo">Artículo - {{@index}}</span>
-					{{else}}
+						{{else}}
 						<i class="fas fa-lock-open"></i>&nbsp;
 						Acceso libre <span class="home-articulo">Artículo - {{@index}}</span>
-					{{/if}}
+						{{/if}}
+					</div>
+					<div class="home-tesis-cuerpo1 col-12">
+						<div class="home-titulo col-12">
+							{{this.titulo}}
+						</div>
+						<div class="home-autor col-12">
+							{{this.autores}} (Universidad Nacional Mayor de San Marcos, {{this.fecha}})
+						</div>
+						<div class="home-contenido col-12">
+							{{this.descripcion}}
+						</div>
+						<div class="home-visitas col-12">
+							Numero de visitas: {{this.numero_vistas}}
+						</div>
+					</div>
 				</div>
-				<div class="home-tesis-cuerpo1 col-12">
-					<div class="home-titulo col-12">
-						{{this.titulo}}
-					</div>
-					<div class="home-autor col-12">
-						{{this.autores}} (Universidad Nacional Mayor de San Marcos, {{this.fecha}})
-					</div>
-					<div class="home-contenido col-12">
-						{{this.descripcion}}
-					</div>
-					<div class="home-visitas col-12">
-						Numero de visitas: {{this.numero_vistas}}
-					</div>
-				</div>
-			</div>
-			<br />
+				<br />
+			</a>
 		{{/each}}
 
 	</div>

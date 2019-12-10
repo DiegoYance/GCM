@@ -33,7 +33,6 @@ exports.buscar = async (req, res, next) => {
         const documentos = await Documento.find(filter).skip(skip).limit(limit).sort({ "fecha": -1 })
 
         const { previous_page, next_page } = util.getPagination(page, pages)
-        console.log(documentos);
 
         res.render('buscador/buscar',
             {
@@ -122,7 +121,6 @@ exports.asesor = async (req, res, next) => {
 
 
 exports.comunidades_coleccion = async (req, res, next) => {
-    console.log('comunidades y coleccion');
     try {
         res.render('buscador/comunidades_coleccion', { title: "Comunidades & Colección", layout: "main" });
     } catch (error) {
@@ -131,7 +129,6 @@ exports.comunidades_coleccion = async (req, res, next) => {
 }
 
 exports.comunidad = async (req, res, next) => {
-    console.log('comunidad');
     try {
         const query = req.query;
         const stage = []
@@ -606,7 +603,6 @@ exports.rango_anios = async (req, res, next) => {
 
 
 exports.comunidadadmin = async (req, res, next) => {
-    console.log('comunidad');
     try {
         const query = req.query;
         const stage = []

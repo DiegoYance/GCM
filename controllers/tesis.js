@@ -8,8 +8,6 @@ const AppError = require("../helpers/AppError")
 **/
 exports.crear = async (req, res, next) => {
     try {
-        console.log('llegas');
-        console.log(req.body);
         
         const body = req.body
         // Crear un nuevo documento

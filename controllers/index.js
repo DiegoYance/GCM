@@ -1,7 +1,6 @@
 exports.home = (req, res, next) => {
     res.render('home/home', {title: "Página de Inicio", layout: "main"});
 }
-console.log('0.- exports.buscar')
 exports.buscar = (req, res, next) => {
     res.render('buscador/buscar', {title: "Buscar", layout: "main"});
 }

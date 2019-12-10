@@ -10,9 +10,9 @@ module.exports = multer({
     storage: multerS3({
         s3: s3,
         bucket: 'unmsm-sgt',
+        acl: 'public-read',
         contentType: multerS3.AUTO_CONTENT_TYPE,
         key: function (req, file, cb) {
-            console.log(file);
             const name = `${Date.now()}.pdf`
             req.body.URL_archivo = `https://unmsm-sgt.s3.us-east-2.amazonaws.com/${name}`
             cb(null, name);
