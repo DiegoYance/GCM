@@ -62,7 +62,7 @@ exports.postRegistro = async (req, res, next) => {
 
     req.logIn(newUser, (err) => {
       if (err) return next(err);
-      return res.redirect('usuario');
+      return res.redirect('/');
     });
 
   } catch (error) {
