@@ -103,7 +103,7 @@ exports.asesor = async (req, res, next) => {
         res.render('buscador/asesor',
             {
                 title: "Búsqueda por asesor de tesis",
-                layout: "main",
+                layout: "layoutNoSearch",
                 query,
                 limit,
                 count,
@@ -348,7 +348,7 @@ exports.facultad = async (req, res, next) => {
         
         res.render('buscador/facultad', { 
             title: "Facultad", 
-            layout: "main",
+            layout: "layoutNoSearch",
             facultades,
             limit,
             count,
